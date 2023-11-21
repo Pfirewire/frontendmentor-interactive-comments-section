@@ -50,7 +50,7 @@
             renderComment(reply, currentUser, true);
         }
     };
-    const renderCommentsSection = (comments, currentUser) => {
+    const renderComments = (comments, currentUser) => {
         const commentsSection = document.createElement('div');
         commentsSection.id = 'comments-section';
         for(const comment of comments) {
@@ -60,9 +60,9 @@
             }
         }
     };
-    const renderCommentsData = commentsData => {
-        console.log(commentsData);
-        renderCommentsSection(commentsData.comments, commentsData.currentUser);
+    const renderData = data => {
+        console.log(data);
+        renderComments(data.comments, data.currentUser);
     };
     const getData = async () => {
         let response = await fetch('../data.json');
@@ -71,7 +71,7 @@
             return null;
         }
         let data = await response.json();
-        renderCommentsData(data);
+        renderData(data);
     };
 
     // Events

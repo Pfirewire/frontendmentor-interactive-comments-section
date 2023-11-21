@@ -2,5 +2,6 @@
   "name": "frontendmentor-interactive-comments-section",
   "version": "1.0.0",
   "dependencies": {
+    "json-server": "^0.17.4"
   }
 }
