@@ -27,7 +27,7 @@
                             <img src="${comment.user.image.png}">
                         </div>
                         <div class="comment-author">${comment.user.username}</div>
-                        ${isCurrentUser(comment, currentUser) ? '<div class="you-div">You</div>' : ''}
+                        ${isCurrentUser(comment, currentUser) ? '<div class="you-div">you</div>' : ''}
                         <div class="comment-created-at">${comment.createdAt}</div>
                     </div>
                     <div class="header-right">
@@ -69,8 +69,8 @@
             <div class="create-comment-avatar">
                 <img src="${user.image.png}">
             </div>
-            <textarea class="create-comment-input" placeholder="Add a comment..."></textarea>
-            <button type="button" class="create-comment-btn">SEND</button>
+            <textarea class="create-comment-input" rows="4" placeholder="Add a comment..."></textarea>
+            <button type="button" class="create-comment-btn pointer">SEND</button>
         `;
         commentsContainer.appendChild(createCommentEl);
     };
