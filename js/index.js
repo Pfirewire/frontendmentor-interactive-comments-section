@@ -44,7 +44,7 @@
                 </div>
             </div>
         `;
-        commentEl.querySelector('.comment-reply').addEventListener('click', handleReplyClick);
+        if(!isCurrentUser(comment)) commentEl.querySelector('.comment-reply').addEventListener('click', handleReplyClick);
         commentsContainer.appendChild(commentEl);
     }
     function renderReplies(replies) {
@@ -79,6 +79,7 @@
         commentsContainer.appendChild(createCommentEl);
     }
     function renderCreateReply(replyToElement) {
+        console.log('Inside renderCreateReply');
         const createReplyEl = document.createElement('div');
         createReplyEl.classList.add('create-reply-container');
         createReplyEl.innerHTML = `
@@ -88,7 +89,7 @@
             <textarea class="create-reply-input" rows="4" placeholder="Add a comment..."></textarea>
             <button type="button" class="create-reply-btn pointer">SEND</button>
         `;
-
+        replyToElement.insertAdjacentElement("afterend", createReplyEl);
     }
     function renderData(data) {
         console.log(data);
@@ -108,7 +109,7 @@
         return data.currentUser;
     }
     function handleReplyClick(e) {
-
+        renderCreateReply(e.target.parentElement.parentElement.parentElement.parentElement);
     }
 
     // Events
