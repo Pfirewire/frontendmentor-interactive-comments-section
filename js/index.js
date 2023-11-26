@@ -74,6 +74,17 @@
         `;
         commentsContainer.appendChild(createCommentEl);
     };
+    const renderCreateReply = (user, replyToElement) => {
+        const createReplyEl = document.createElement('div');
+        createReplyEl.classList.add('create-reply-container');
+        createReplyEl.innerHTML = `
+            <div class="create-reply-avatar">
+                <img src="${user.image.png}">
+            </div>
+            <textarea class="create-reply-input" rows="4" placeholder="Add a comment..."></textarea>
+            <button type="button" class="create-reply-btn pointer">SEND</button>
+        `;
+    };
     const renderData = data => {
         console.log(data);
         renderComments(data.comments, data.currentUser);
