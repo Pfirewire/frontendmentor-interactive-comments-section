@@ -11,6 +11,9 @@
     function isCurrentUser(comment) {
         return comment.user.username === currentUser.username;
     }
+    function replyAlreadyOpen(replyToElement) {
+        return replyToElement.nextElementSibling.classList.contains('create-reply-container');
+    }
     function renderComment(commentEl, comment, isReply) {
         commentEl.setAttribute('data-comment-id', comment.id);
         commentEl.innerHTML = `
@@ -80,6 +83,15 @@
     }
     function renderCreateReply(replyToElement) {
         console.log('Inside renderCreateReply');
+        console.log(replyToElement);
+        if(replyAlreadyOpen(replyToElement)) {
+            // focus on reply that is open
+            console.log('Reply already open');
+            console.log(replyToElement.nextElementSibling);
+            console.log(replyToElement.nextElementSibling.querySelector('.create-reply-input'));
+            replyToElement.nextElementSibling.querySelector('.create-reply-input').focus();
+            return;
+        }
         const createReplyEl = document.createElement('div');
         createReplyEl.classList.add('create-reply-container');
         createReplyEl.innerHTML = `
@@ -87,8 +99,9 @@
                 <img src="${currentUser.image.png}">
             </div>
             <textarea class="create-reply-input" rows="4" placeholder="Add a comment..."></textarea>
-            <button type="button" class="create-reply-btn pointer">SEND</button>
+            <button type="button" class="create-reply-btn pointer">REPLY</button>
         `;
+        createReplyEl.style.width = `${replyToElement.offsetWidth}px`;
         replyToElement.insertAdjacentElement("afterend", createReplyEl);
     }
     function renderData(data) {

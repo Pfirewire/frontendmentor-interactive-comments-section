@@ -125,6 +125,10 @@ body {
     gap: 0.5rem;
 }
 
+.comment-delete *, .comment-edit *, .comment-reply * {
+    pointer-events: none;
+}
+
 .comment-edit, .comment-reply {
     color: var(--moderate-blue);
 }
@@ -133,7 +137,7 @@ body {
     color: var(--moderate-blue);
 }
 
-#create-comment-container {
+#create-comment-container, .create-reply-container {
     display: flex;
     align-items: start;
     gap: 1rem;
@@ -143,20 +147,27 @@ body {
     padding: 1.5rem;
 }
 
-.create-comment-avatar {
+.create-reply-container {
+    margin-top: -1.5rem;
+}
+
+.create-comment-avatar, .create-reply-avatar {
     height: 40px;
     width: 40px;
 }
 
-.create-comment-input {
+.create-comment-input, .create-reply-input {
     all: unset;
     flex: 1 0 0;
     border: 1px solid var(--light-gray);
     border-radius: 5px;
     padding: 0.5rem 1.25rem;
+    &:focus {
+        border: 1px solid var(--moderate-blue);
+    }
 }
 
-.create-comment-btn {
+.create-comment-btn, .create-reply-btn {
     all: unset;
     color: var(--white);
     background-color: var(--moderate-blue);
