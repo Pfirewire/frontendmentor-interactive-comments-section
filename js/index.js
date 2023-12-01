@@ -18,6 +18,10 @@
         replyInput.focus();
         replyInput.setSelectionRange(replyInput.value.length, replyInput.value.length);
     }
+    function findCommentId(clickedEl) {
+        return clickedEl.parentElement.parentElement.parentElement.parentElement.getAttribute('data-comment-id');
+    }
+
     function renderComment(commentEl, comment, isReply) {
         commentEl.setAttribute('data-comment-id', comment.id);
         commentEl.innerHTML = `
@@ -52,6 +56,10 @@
             </div>
         `;
         if(!isCurrentUser(comment)) commentEl.querySelector('.comment-reply').addEventListener('click', handleReplyClick);
+        else {
+            commentEl.querySelector('.comment-edit').addEventListener('click', handleEditClick);
+            commentEl.querySelector('.comment-delete').addEventListener('click', handleDeleteClick);
+        }
         commentsContainer.appendChild(commentEl);
     }
     function renderReplies(replies) {
@@ -108,6 +116,10 @@
         renderComments(data.comments);
         renderCreateComment();
     }
+    function renderEditComment(commentEl) {
+
+    }
+
     async function getData() {
         let response = await fetch('../data.json');
         if(!response.ok) {
@@ -120,8 +132,19 @@
         const data = await getData();
         return data.currentUser;
     }
+
     function handleReplyClick(e) {
-        renderCreateReply(e.target.parentElement.parentElement.parentElement.parentElement);
+        renderCreateReply(findCommentId(e.target));
+    }
+    function handleEditClick(e) {
+        console.log('edit clicked');
+        const commentId = findCommentId(e.target);
+        console.log(`Comment id: ${commentId}`);
+    }
+    function handleDeleteClick(e) {
+        console.log('delete clicked');
+        const commentId = findCommentId(e.target);
+        console.log(`Comment id: ${commentId}`);
     }
 
     // Events
